@@ -46,6 +46,6 @@ SRC_URI = "git://github.com/ros2-gbp/ros_workspace-release;${ROS_BRANCH};protoco
 SRCREV = "0c65f4036c97c0db955aaeb06fb728bfbc78c132"
 S = "${WORKDIR}/git"
 
-ROS_BUILD_TYPE = "cmake"
+ROS_BUILD_TYPE = "ament_cmake"
 
 inherit ros_${ROS_BUILD_TYPE}

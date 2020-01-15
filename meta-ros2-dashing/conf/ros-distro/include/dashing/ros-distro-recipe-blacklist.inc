@@ -47,4 +47,4 @@ ROS_SUPERFLORE_GENERATED_WORLD_PACKAGES_remove = "rosidl-typesupport-opensplice-
 ROS_SUPERFLORE_GENERATED_WORLD_PACKAGES_remove = "rosidl-typesupport-opensplice-cpp"
 
 # Others
-PNBLACKLIST[libyaml] ?= "Provided by libyaml-vendor"
+# PNBLACKLIST[libyaml] ?= "Provided by libyaml-vendor"
