@@ -1,5 +1,14 @@
+From b8798cea3a60edde268c5efa8dae1e0ab4a09b55 Mon Sep 17 00:00:00 2001
+From: Michael Roessler <michael.a.roessler@campus.tu-berlin.de>
+Date: Thu, 6 Feb 2020 15:01:19 +0100
+Subject: [PATCH] Fix sysroot for crosscompiling
+
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index cc61043..c0638cc 100644
+index cc61043..674e987 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -8,7 +8,7 @@ execute_process(COMMAND python3 -c "from distutils import sysconfig; print(sysco
@@ -7,7 +16,7 @@ index cc61043..c0638cc 100644
  # Locate ament_package template files.
  set(PYTHON_INSTALL_DIR "lib/python${PYTHON_MAJOR_MINOR}/site-packages")
 -set(AMENT_PACKAGE_DIR "${CMAKE_INSTALL_PREFIX}/${PYTHON_INSTALL_DIR}/ament_package")
-+find_file(AMENT_PACKAGE_DIR "${PYTHON_INSTALL_DIR}/ament_package")
++set(AMENT_PACKAGE_DIR "$ENV{STAGING_DIR_NATIVE}${CMAKE_INSTALL_PREFIX}/${PYTHON_INSTALL_DIR}/ament_package")
  if(NOT EXISTS "${AMENT_PACKAGE_DIR}")
    # Check for an .egg-link file and use the listed directory if it exists
    get_filename_component(AMENT_PACKAGE_EGG_LINK "${AMENT_PACKAGE_DIR}" DIRECTORY)
