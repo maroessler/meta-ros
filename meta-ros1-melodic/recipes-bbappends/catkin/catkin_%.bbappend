@@ -5,6 +5,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
 SRC_URI += " \
     file://0001-use-python-provided-by-environment-instead-of-the-ge.patch \
     file://0002-allow-proper-cross-compilation-with-catkin.patch \
+    file://environment.d-catkin.sh \
 "
 
 ROS_BUILD_DEPENDS_remove = "python-catkin-pkg"
@@ -48,3 +49,27 @@ PACKAGES =+ "${PN}-implicitworkspace"
 FILES_${PN}-implicitworkspace = " \
     ${sysconfdir}/profile.d/ros.sh \
 "
+
+# Append environment hook for SDK
+do_install_append_class-nativesdk() {
+    mkdir -p ${D}${SDKPATHNATIVE}/environment-setup.d
+
+    script=${D}${SDKPATHNATIVE}/environment-setup.d/catkin-runtime.sh
+    echo "export ROSDISTRO=${ROS_DISTRO}" >> $script
+    echo "export PATH=\$PATH:\${OECORE_NATIVE_SYSROOT}/opt/ros/\${ROS_DISTRO}/bin" >> $script
+    echo "export PYTHONPATH=\${OECORE_NATIVE_SYSROOT}/opt/ros/\${ROS_DISTRO}/lib/python2.7/site-packages" >> $script
+    echo "export ROS_ROOT=\${OECORE_TARGET_SYSROOT}/opt/ros/\${ROS_DISTRO}/share/ros" >> $script
+    echo "export CMAKE_PREFIX_PATH=\${OECORE_TARGET_SYSROOT}/opt/ros/\${ROS_DISTRO}:\${OECORE_NATIVE_SYSROOT}/opt/ros/${ROS_DISTRO}" >> $script
+
+    install -m 644 ${WORKDIR}/environment.d-catkin.sh ${D}${SDKPATHNATIVE}/environment-setup.d/catkin.sh
+}
+
+FILES_${PN}_append_class-nativesdk = " ${SDKPATHNATIVE}"
+
+catkin_sysroot_preprocess_append() {
+    install -m 644 -t ${SYSROOT_DESTDIR}${ros_prefix} ${D}${ros_prefix}/.catkin
+}
+
+RDEPENDS_${PN}_class-nativesdk += "python-setuptools  python-six"
+
+BBCLASSEXTEND += "native nativesdk"
