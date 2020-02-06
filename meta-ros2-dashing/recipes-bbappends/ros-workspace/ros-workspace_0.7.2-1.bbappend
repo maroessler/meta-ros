@@ -7,5 +7,6 @@ ROS_BUILDTOOL_DEPENDS += " \
     ament-package-native \
 "
 
+export STAGING_DIR_NATIVE
 FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
-SRC_URI_append = " file://0001-Use-find-package-instead-of-set.patch"
+SRC_URI += "file://0001-Fix-sysroot-for-crosscompiling.patch"
