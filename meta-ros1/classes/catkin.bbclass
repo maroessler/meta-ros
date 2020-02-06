@@ -19,11 +19,18 @@ EXTRA_OECMAKE_CATKIN = "\
     "
 
 EXTRA_OECMAKE_CATKIN_class-native = "\
-    -DCMAKE_PREFIX_PATH='${STAGING_DIR_NATIVE}${ros_prefix}' \
+    -DCMAKE_PREFIX_PATH='${STAGING_DIR_NATIVE}${ros_prefix}:${STAGING_DIR_NATIVE}${prefix}' \
     -DCMAKE_INSTALL_PREFIX:PATH='${ros_prefix}' \
     -DRT_LIBRARY=${libdir_native} \
     -DCATKIN_DEVEL_PREFIX='${WORKDIR}/devel' \
     "
+
+EXTRA_OECMAKE_CATKIN_class-nativesdk = "\
+    -DCMAKE_PREFIX_PATH='${STAGING_DIR_NATIVE}${ros_prefix}:${STAGING_DIR_NATIVE}${prefix}' \
+    -DCMAKE_INSTALL_PREFIX:PATH='${ros_prefix}' \
+    -DRT_LIBRARY=${libdir_native} \
+    -DCATKIN_DEVEL_PREFIX='${WORKDIR}/devel' \
+"
 
 EXTRA_OECMAKE_prepend = "\
     ${EXTRA_OECMAKE_CATKIN} \
