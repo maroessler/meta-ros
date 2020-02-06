@@ -13,5 +13,6 @@ inherit pypi
 
 RDEPENDS_${PN} = "${PYTHON_PN}-unixadmin ${PYTHON_PN}-pyparsing ${PYTHON_PN}-dateutil ${PYTHON_PN}-docutils"
 RDEPENDS_${PN}_class-native = ""
+RDEPENDS_${PN}_class-nativesdk = "${PYTHON_PN}-dateutil ${PYTHON_PN}-docutils"
 
 BBCLASSEXTEND = "native nativesdk"

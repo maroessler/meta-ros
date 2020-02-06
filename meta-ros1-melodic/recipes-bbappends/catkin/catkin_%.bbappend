@@ -6,6 +6,7 @@ SRC_URI += " \
     file://0001-use-python-provided-by-environment-instead-of-the-ge.patch \
     file://0002-allow-proper-cross-compilation-with-catkin.patch \
     file://0001-builder.py-don-t-prepend-ld_path-to-LD_LIBRARY_PATH.patch \
+    file://environment.d-catkin.sh \
 "
 
 ROS_BUILD_DEPENDS_remove = "python-catkin-pkg"
@@ -50,8 +51,34 @@ FILES_${PN}-implicitworkspace = " \
     ${sysconfdir}/profile.d/ros.sh \
 "
 
+<<<<<<< HEAD
 # Used to disable exporting LD_LIBRARY_PATH when building with catkin
 # because on builder with the same architecture as target MACHINE it
 # will try to use incompatible libraries (e.g. libpython) from TARGET
 # sysroot instead using the one from host (e.g. for native python)
 export CATKIN_CROSSCOMPILING = "1"
+=======
+# Append environment hook for SDK
+do_install_append_class-nativesdk() {
+    mkdir -p ${D}${SDKPATHNATIVE}/environment-setup.d
+
+    script=${D}${SDKPATHNATIVE}/environment-setup.d/catkin-runtime.sh
+    echo "export ROSDISTRO=${ROS_DISTRO}" >> $script
+    echo "export PATH=\$PATH:\${OECORE_NATIVE_SYSROOT}/opt/ros/\${ROS_DISTRO}/bin" >> $script
+    echo "export PYTHONPATH=\${OECORE_NATIVE_SYSROOT}/opt/ros/\${ROS_DISTRO}/lib/python2.7/site-packages" >> $script
+    echo "export ROS_ROOT=\${OECORE_TARGET_SYSROOT}/opt/ros/\${ROS_DISTRO}/share/ros" >> $script
+    echo "export CMAKE_PREFIX_PATH=\${OECORE_TARGET_SYSROOT}/opt/ros/\${ROS_DISTRO}:\${OECORE_NATIVE_SYSROOT}/opt/ros/${ROS_DISTRO}" >> $script
+
+    install -m 644 ${WORKDIR}/environment.d-catkin.sh ${D}${SDKPATHNATIVE}/environment-setup.d/catkin.sh
+}
+
+FILES_${PN}_append_class-nativesdk = " ${SDKPATHNATIVE}"
+
+catkin_sysroot_preprocess_append() {
+    install -m 644 -t ${SYSROOT_DESTDIR}${ros_prefix} ${D}${ros_prefix}/.catkin
+}
+
+RDEPENDS_${PN}_class-nativesdk += "python-setuptools  python-six"
+
+BBCLASSEXTEND += "native nativesdk"
+>>>>>>> melodic: SDK support
