@@ -28,11 +28,11 @@ inherit cmake qemu
 # | /bin/sh: 1: PSEUDO_UNLOAD=1 qemu-arm -r 3.2.0  -L /jenkins/mjansa/build-ros-thud-dashing/BUILD/work/cortexa7t2hf-neon-vfpv4-oe-linux-gnueabi/foonathan-memory/0.6.2+gitAUTOINC+8f6a027d47-r0/recipe-sysroot -E LD_LIBRARY_PATH=/jenkins/mjansa/build-ros-thud-dashing/BUILD/work/cortexa7t2hf-neon-vfpv4-oe-linux-gnueabi/foonathan-memory/0.6.2+gitAUTOINC+8f6a027d47-r0/build:/jenkins/mjansa/build-ros-thud-dashing/BUILD/work/cortexa7t2hf-neon-vfpv4-oe-linux-gnueabi/foonathan-memory/0.6.2+gitAUTOINC+8f6a027d47-r0/recipe-sysroot//lib: not found
 EXTRA_OECMAKE = '-DCMAKE_CROSSCOMPILING_EMULATOR="${@qemu_target_binary(d)}"'
 
-# Add -fPIC, otherwise fastrtps fails to link with static libfoonathan_memory-0.6.2.a
-# | /jenkins/mjansa/build-ros-thud-dashing/BUILD/work/cortexa7t2hf-neon-vfpv4-oe-linux-gnueabi/fastrtps/1.9.3-1-r0/recipe-sysroot-native/usr/bin/arm-oe-linux-gnueabi/../../libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/8.2.0/ld: /jenkins/mjansa/build-ros-thud-dashing/BUILD/work/cortexa7t2hf-neon-vfpv4-oe-linux-gnueabi/fastrtps/1.9.3-1-r0/recipe-sysroot/usr/lib/libfoonathan_memory-0.6.2.a(error.cpp.o): relocation R_ARM_THM_MOVW_ABS_NC against `a local symbol' can not be used when making a shared object; recompile with -fPIC
+# Add -fPIC, otherwise ros2-fastrtps fails to link with static libfoonathan_memory-0.6.2.a
+# | /jenkins/mjansa/build-ros-thud-dashing/BUILD/work/cortexa7t2hf-neon-vfpv4-oe-linux-gnueabi/ros2-fastrtps/1.9.3-1-r0/recipe-sysroot-native/usr/bin/arm-oe-linux-gnueabi/../../libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/8.2.0/ld: /jenkins/mjansa/build-ros-thud-dashing/BUILD/work/cortexa7t2hf-neon-vfpv4-oe-linux-gnueabi/ros2-fastrtps/1.9.3-1-r0/recipe-sysroot/usr/lib/libfoonathan_memory-0.6.2.a(error.cpp.o): relocation R_ARM_THM_MOVW_ABS_NC against `a local symbol' can not be used when making a shared object; recompile with -fPIC
 CXXFLAGS += "-fPIC"
 # and similarly for native
-# fastrtps-native/1.9.3-1-r0/recipe-sysroot-native/usr/lib/libfoonathan_memory-0.6.2.a(virtual_memory.cpp.o): relocation R_X86_64_PC32 against symbol `_ZN9foonathan6memory24virtual_memory_page_sizeE' can not be used when making a shared object; recompile with -fPIC
+# ros2-fastrtps-native/1.9.3-1-r0/recipe-sysroot-native/usr/lib/libfoonathan_memory-0.6.2.a(virtual_memory.cpp.o): relocation R_X86_64_PC32 against symbol `_ZN9foonathan6memory24virtual_memory_page_sizeE' can not be used when making a shared object; recompile with -fPIC
 BUILD_CXXFLAGS += "-fPIC"
 
 # We need to stage nodesize_dbg binary, because foonathan_memory-config.cmake references it and without this foonathan-memory-vendor fails with:
