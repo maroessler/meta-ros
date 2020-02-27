@@ -30,8 +30,3 @@ EXTRA_OECMAKE_append = "\
 export AMENT_PREFIX_PATH="${STAGING_DIR_HOST}${ros_prefix};${STAGING_DIR_NATIVE}${ros_prefix}"
 
 inherit cmake python3native
-
-# FILES_${PN}_prepend = " \
-#     ${datadir}/ament_index \
-#     ${ros_prefix}/* \
-# "

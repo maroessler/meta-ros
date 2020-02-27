@@ -3,8 +3,11 @@
 # Copyright (c) 2019 LG Electronics, Inc.
 
 ROS_DISTRO = "melodic"
+ROS_DISTRO_TYPE = "ros1"
+ROS_VERSION = "1"
+ROS_PYTHON_VERSION = "2"
 
-inherit ${ROS_DISTRO_TYPE}_distro
+inherit ros1_distro
 
 # If not using Qt, drop all RDEPENDS on "python-qt-binding".
 #ROS_EXEC_DEPENDS_remove = "${@bb.utils.contains('BBFILE_COLLECTIONS', 'qt5-layer', '', 'python-qt-binding', d)}"

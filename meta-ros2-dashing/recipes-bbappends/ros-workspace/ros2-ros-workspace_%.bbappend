@@ -4,7 +4,7 @@
 # which will be added to images when IMAGE_FEATURES contains "ros-implicit-workspace"
 do_install_append() {
     mkdir -p ${D}${sysconfdir}/profile.d
-    echo ". ${ros_prefix}/setup.sh" > ${D}${sysconfdir}/profile.d/ros.sh
+    echo ". ${ros_prefix}/setup.sh" > ${D}${sysconfdir}/profile.d/ros2.sh
 }
 
 PACKAGES =+ "${PN}-implicitworkspace"
@@ -17,7 +17,5 @@ FILES_${PN} += " \
 "
 
 FILES_${PN}-implicitworkspace = " \
-    ${sysconfdir}/profile.d/ros.sh \
+    ${sysconfdir}/profile.d/ros2.sh \
 "
-
-inherit ros_ament_cmake

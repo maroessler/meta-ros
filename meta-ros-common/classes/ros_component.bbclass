@@ -14,14 +14,3 @@ ROS_BPN ??= "${@d.getVar('BPN', True).replace('-', '_')}"
 ROS_CN ??= "${ROS_BPN}"
 ROS_SPN ??= "${ROS_BPN}"
 ROS_SP ??= "${ROS_SPN}-${PV}"
-
-inherit faulty-solibs
-FILES_${PN}_prepend = " \
-    ${datadir}/${ROS_BPN} \
-    ${libdir}/${PYTHON_DIR} \
-    ${libdir}/${ROS_BPN} \
-"
-
-FILES_${PN}-dev_prepend = " \
-    ${datadir}/${ROS_BPN}/cmake \
-"

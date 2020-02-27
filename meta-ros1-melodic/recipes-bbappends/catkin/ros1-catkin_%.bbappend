@@ -41,14 +41,14 @@ do_install_append_class-target() {
     sed -i -e 's@${RECIPE_SYSROOT}/@/@g' ${D}${ros_prefix}/_setup_util.py
 
     mkdir -p ${D}${sysconfdir}/profile.d
-    echo ". ${ros_prefix}/setup.sh" > ${D}${sysconfdir}/profile.d/ros.sh
+    echo ". ${ros_prefix}/setup.sh" > ${D}${sysconfdir}/profile.d/ros1.sh
 }
 
 # NB. COMPLEMENTARY_GLOB[ros-implicit-workspace] = "*-implicitworkspace"
 PACKAGES =+ "${PN}-implicitworkspace"
 
 FILES_${PN}-implicitworkspace = " \
-    ${sysconfdir}/profile.d/ros.sh \
+    ${sysconfdir}/profile.d/ros1.sh \
 "
 
 # Used to disable exporting LD_LIBRARY_PATH when building with catkin
