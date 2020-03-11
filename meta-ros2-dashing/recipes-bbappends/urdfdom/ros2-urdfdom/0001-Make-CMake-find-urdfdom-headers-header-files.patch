@@ -1,0 +1,22 @@
+From 7918623178d0fe0eb40f361ce87ae9dc317363b0 Mon Sep 17 00:00:00 2001
+From: Michael Roessler <michael.a.roessler@campus.tu-berlin.de>
+Date: Wed, 11 Mar 2020 13:49:20 +0100
+Subject: [PATCH] Make CMake find urdfdom-headers header files
+
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c01f19c..4a2cc62 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -37,7 +37,7 @@ find_package(TinyXML REQUIRED)
+ include_directories(SYSTEM ${TinyXML_INCLUDE_DIRS})
+ 
+ find_package(urdfdom_headers 1.0 REQUIRED)
+-include_directories(SYSTEM ${urdfdom_headers_INCLUDE_DIRS})
++include_directories(SYSTEM $ENV{STAGING_DIR_HOST}${urdfdom_headers_INCLUDE_DIRS})
+ 
+ # Default to C++14
+ if(NOT CMAKE_CXX_STANDARD)
