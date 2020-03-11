@@ -1,7 +1,7 @@
 # Copyright (c) 2019 LG Electronics, Inc.
 
 ROS_BUILD_DEPENDS += " \
-    rclcpp \
+    ros2-rclcpp \
 "
 
 ROS_BUILDTOOL_DEPENDS += " \
