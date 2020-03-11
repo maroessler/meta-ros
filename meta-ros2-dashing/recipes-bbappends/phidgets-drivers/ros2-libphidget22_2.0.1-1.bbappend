@@ -5,7 +5,7 @@
 # headers only autotools files are GPL-3.0+
 LICENSE = "LGPL-3.0+"
 
-DEPENDS += "${PN}-upstream"
+DEPENDS += "libphidget22-upstream"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
 SRC_URI += "file://0001-Use-libphidget22-from-libphidget22-upstream-and-norm.patch"

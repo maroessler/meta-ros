@@ -65,8 +65,8 @@ index 7a386fa..ccf3d59 100644
  # TODO(clalancette): Does this work in general?
 -list(APPEND @PROJECT_NAME@_INCLUDE_DIRS "${@PROJECT_NAME@_DIR}/../../../opt/libphidget22/include")
 -list(APPEND @PROJECT_NAME@_LIBRARIES "${@PROJECT_NAME@_DIR}/../../../opt/libphidget22/lib/libphidget22.so")
-+list(APPEND @PROJECT_NAME@_INCLUDE_DIRS "${@PROJECT_NAME@_DIR}/../../../../usr/include")
-+list(APPEND @PROJECT_NAME@_LIBRARIES "${@PROJECT_NAME@_DIR}/../../../../usr/lib/libphidget22.so")
++list(APPEND @PROJECT_NAME@_INCLUDE_DIRS "${@PROJECT_NAME@_DIR}/../../../../../../usr/include")
++list(APPEND @PROJECT_NAME@_LIBRARIES "${@PROJECT_NAME@_DIR}/../../../../../../usr/lib/libphidget22.so")
 diff --git a/patch/libphidgets22-fix-uninitialized-memory-access.patch b/patch/libphidgets22-fix-uninitialized-memory-access.patch
 deleted file mode 100644
 index 60817ac..0000000
