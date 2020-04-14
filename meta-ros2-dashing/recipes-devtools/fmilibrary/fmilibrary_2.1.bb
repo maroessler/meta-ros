@@ -1,4 +1,4 @@
-# Copyright (c) 2019 LG Electronics, Inc.
+# Copyright (c) 2019-2020 LG Electronics, Inc.
 
 DESCRIPTION = "Extensible Modelica-based platform for optimization, simulation and analysis of complex dynamic systems."
 HOMEPAGE = "https://jmodelica.org/"
@@ -6,11 +6,11 @@ SECTION = "devel"
 LICENSE = "Zlib"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=feb42903281464837bc0c9a861b1e7a1"
 
-SRC_URI = "https://jmodelica.org/fmil/FMILibrary-${PV}-src.zip"
-SRC_URI[md5sum] = "53d8edd7442c31bcd3fb56477e574845"
-SRC_URI[sha256sum] = "4cc21f9e2c4114a6f4e303f82ca897ec9aa1eb6f7f09fef85979ea5fca309d9a"
+# matches with tag 2.1
+SRCREV = "d5ce0b923dd42fbc59b61edb17e837cd148e9501"
+SRC_URI = "git://github.com/modelon-community/fmi-library"
 
-S = "${WORKDIR}/FMILibrary-${PV}"
+S = "${WORKDIR}/git"
 
 inherit cmake
 
@@ -34,3 +34,8 @@ FILES_SOLIBSDEV = ""
 FILES_${PN} += " \
     ${libdir}/lib*${SOLIBSDEV} \
 "
+
+# it generates duplicate rules for ExpatEx/libexpat.a and newer ninja-1.9.0 fails because of that
+# NOTE: VERBOSE=1 cmake --build fmilibrary/2.0.3-r0/build --target all -- -j 20
+# ninja: error: build.ninja:1652: multiple rules generate ExpatEx/libexpat.a [-w dupbuild=err]
+EXTRA_OECMAKE_BUILD_append_task-compile = "-w dupbuild=warn"

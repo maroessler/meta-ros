@@ -1,0 +1,22 @@
+From 36c463575218837fe8d207d4e16b9bd386a4673f Mon Sep 17 00:00:00 2001
+From: Michael Roessler <michael.a.roessler@campus.tu-berlin.de>
+Date: Mon, 13 Apr 2020 18:48:50 +0200
+Subject: [PATCH] Make compiler find jsoncpp
+
+---
+ include/ros2_ouster/OS1/OS1.hpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/ros2_ouster/OS1/OS1.hpp b/include/ros2_ouster/OS1/OS1.hpp
+index 1b7039f..3a9eb4c 100644
+--- a/include/ros2_ouster/OS1/OS1.hpp
++++ b/include/ros2_ouster/OS1/OS1.hpp
+@@ -37,7 +37,7 @@
+ #include "sys/socket.h"
+ #include "sys/types.h"
+ 
+-#include "jsoncpp/json/json.h"
++#include "json/json.h"
+ #include "ros2_ouster/OS1/OS1_packet.hpp"
+ #include "ros2_ouster/interfaces/metadata.hpp"
+ 

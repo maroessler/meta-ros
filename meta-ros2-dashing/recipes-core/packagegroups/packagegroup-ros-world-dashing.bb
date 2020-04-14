@@ -53,32 +53,6 @@ RDEPENDS_${PN}_remove = "ros2-launch-ros-sandbox"
 # or not to install completely empty package like here
 RDEPENDS_${PN}_remove = "ros2-sophus"
 
-# | CMake Error at .../cartographer/1.0.0-1-r0/recipe-sysroot/usr/lib/cmake/Ceres/CeresConfig.cmake:88 (message):
-# |   Failed to find Ceres - Missing requested Ceres components: [SuiteSparse]
-# |   (components requested: [SuiteSparse]).  Detected Ceres version: 1.14.0
-# |   installed in:
-# |   .../cartographer/1.0.0-1-r0/recipe-sysroot/usr
-# |   with components: [EigenSparse, SparseLinearAlgebraLibrary,
-# |   SchurSpecializations, OpenMP, Multithreading].
-RDEPENDS_${PN}_remove = "ros2-cartographer"
-
-# do_compile() failed to build .a:
-# NOTE: VERBOSE=1 cmake --build .../fmi-adapter/0.1.4-1-r0/build --target all -- -j 24
-# ninja: error: 'FMILibraryProject-prefix/src/install/lib/libfmilib.a', needed by 'libfmi_adapter.so', missing and no known rule to make it
-# WARNING: exit code 1 from a shell command.
-# ERROR: Function failed: do_compile
-RDEPENDS_${PN}_remove = "ros2-fmi-adapter"
-RDEPENDS_${PN}_remove = "ros2-fmi-adapter-examples"
-
-# Call of overloaded function is ambiguous:
-# | from .../teleop_twist_joy-release-release-dashing-teleop_twist_joy-2.2.0-1/src/teleop_twist_joy.cpp:28:
-# | .../recipe-sysroot/usr/include/rclcpp/node_impl.hpp: In instantiation of 'auto rclcpp::Node::declare_parameter(const string&, const ParameterT&, const ParameterDescriptor&) [with ParameterT = long int; std::__cxx11::string = std::__cxx11::basic_string<char>; rcl_interfaces::msg::ParameterDescriptor = rcl_interfaces::msg::ParameterDescriptor_<std::allocator<void> >]':
-# | .../teleop_twist_joy-release-release-dashing-teleop_twist_joy-2.2.0-1/src/teleop_twist_joy.cpp:78:70:   required from here
-# | .../recipe-sysroot/usr/include/rclcpp/node_impl.hpp:257:13: error: call of overloaded 'ParameterValue(const long int&)' is ambiguous
-# |      rclcpp::ParameterValue(default_value),
-# |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-RDEPENDS_${PN}_remove = "ros2-teleop-twist-joy"
-
 # Contains only dev, dbg and staticdev files, so PN is empty and not created
 RDEPENDS_${PN}_remove = "ros2-cloudwatch-metrics-common"
 
@@ -101,6 +75,7 @@ RDEPENDS_${PN}_remove = "behaviortree-cpp-v3"
 RDEPENDS_${PN}_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'ros-desktop ros-rviz', '', 'ros2-desktop', d)}"
 
 # NB. gazebo-msgs is a dependency of non-Gazebo packages, so it doesn't appear here.
+RDEPENDS_${PN}_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'ros-gazebo', '', 'ros2-dolly-gazebo', d)}"
 RDEPENDS_${PN}_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'ros-gazebo', '', 'ros2-gazebo-rosdev', d)}"
 RDEPENDS_${PN}_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'ros-gazebo', '', 'ros2-gazebo-plugins', d)}"
 RDEPENDS_${PN}_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'ros-gazebo', '', 'ros2-gazebo-ros', d)}"
@@ -152,7 +127,6 @@ RDEPENDS_${PN}_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'ros-rqt ros-qt
 RDEPENDS_${PN}_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'ros-rqt ros-qt5', '', 'ros2-rqt-topic', d)}"
 RDEPENDS_${PN}_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'ros-rqt ros-qt5', '', 'ros2-rqt-tf-tree', d)}"
 
-
 # RViz requires the "opengl" distro feature.
 RDEPENDS_${PN}_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'ros-rviz opengl', '', 'ros2-object-analytics-rviz', d)}"
 RDEPENDS_${PN}_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'ros-rviz opengl', '', 'ros2-rviz-assimp-vendor', d)}"
@@ -163,3 +137,11 @@ RDEPENDS_${PN}_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'ros-rviz openg
 RDEPENDS_${PN}_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'ros-rviz opengl', '', 'ros2-rviz-rendering-tests', d)}"
 RDEPENDS_${PN}_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'ros-rviz opengl', '', 'ros2-rviz-visual-testing-framework', d)}"
 RDEPENDS_${PN}_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'ros-rviz opengl', '', 'ros2-rviz2', d)}"
+
+# Depends on unavailable UNRESOLVED-libopenvdb, UNRESOLVED-libopenexr-dev, UNRESOLVED-libopenvdb-dev
+RDEPENDS_${PN}_remove = "ros2-spatio-temporal-voxel-layer"
+
+# Depends on unavailable ROS_UNRESOLVED_PLATFORM_PKG_autoware_auto_cmake-native, ROS_UNRESOLVED_PLATFORM_PKG_autoware_auto_helper_functions
+RDEPENDS_${PN}_remove = "ros2-serial-driver"
+
+RDEPENDS_${PN}_remove = "ros2-test-osrf-testing-tools-cpp"

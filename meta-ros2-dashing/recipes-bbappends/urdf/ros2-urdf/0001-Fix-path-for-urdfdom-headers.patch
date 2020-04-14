@@ -1,0 +1,24 @@
+From f63cf7a5085543d3c5230ec8c443006674698b28 Mon Sep 17 00:00:00 2001
+From: Michael Roessler <michael.a.roessler@campus.tu-berlin.de>
+Date: Mon, 6 Apr 2020 15:57:20 +0200
+Subject: [PATCH] Fix path for urdfdom headers
+
+---
+ CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f90c260..59752ea 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -28,8 +28,8 @@ install(FILES ${generated_compat_header} DESTINATION include/${PROJECT_NAME})
+ 
+ include_directories(
+   include
+-  ${urdfdom_INCLUDE_DIRS}
+-  ${urdfdom_headers_INCLUDE_DIRS}
++  include_directories($ENV{STAGING_DIR_HOST}${urdfdom_INCLUDE_DIRS})
++  include_directories($ENV{STAGING_DIR_HOST}${urdfdom_headers_INCLUDE_DIRS})
+   ${TinyXML_INCLUDE_DIRS}
+ )
+ 

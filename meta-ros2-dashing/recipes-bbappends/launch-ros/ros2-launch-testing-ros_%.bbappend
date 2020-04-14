@@ -2,5 +2,5 @@
 
 # Remove this empty directory.
 do_install_append() {
-    rmdir -p --ignore-fail-on-non-empty ${D}${datadir}/lib/${ROS_BPN}
+    rmdir -p --ignore-fail-on-non-empty ${D}${ros_libexecdir}
 }

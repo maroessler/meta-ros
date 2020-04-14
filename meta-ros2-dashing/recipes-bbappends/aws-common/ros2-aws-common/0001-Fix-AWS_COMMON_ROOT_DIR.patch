@@ -1,0 +1,35 @@
+From 272a7ac547e31d2aaefb522b4ab7dd454ca3d86c Mon Sep 17 00:00:00 2001
+From: Michael Roessler <michael.a.roessler@campus.tu-berlin.de>
+Date: Mon, 13 Apr 2020 18:46:53 +0200
+Subject: [PATCH] Fix AWS_COMMON_ROOT_DIR
+
+---
+ aws_commonConfig.cmake.in | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/aws_commonConfig.cmake.in b/aws_commonConfig.cmake.in
+index 15cb0c5..e5171a1 100644
+--- a/aws_commonConfig.cmake.in
++++ b/aws_commonConfig.cmake.in
+@@ -1,6 +1,6 @@
+ set(AWS_COMMON_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR}/../../..)
+ 
+-set(AWSSDK_ROOT_DIR ${AWS_COMMON_ROOT_DIR})
++set(AWSSDK_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR}/../../../../../../usr)
+ include("${CMAKE_CURRENT_LIST_DIR}/AWSSDKConfig.cmake")
+ 
+ # Compute paths
+@@ -18,11 +18,11 @@ foreach(_imported_library @aws_common_IMPORTED_LIBRARIES@)
+  if(NOT TARGET ${_imported_library})
+   add_library(${_imported_library} SHARED IMPORTED)
+   set_target_properties(${_imported_library} PROPERTIES
+-    INTERFACE_INCLUDE_DIRECTORIES ${@PROJECT_NAME@_INCLUDE_DIRS}
++    INTERFACE_INCLUDE_DIRECTORIES ${AWSSDK_ROOT_DIR}/include
+   )
+   set_property(TARGET ${_imported_library} APPEND PROPERTY IMPORTED_CONFIGURATIONS NOCONFIG)
+   set_target_properties(${_imported_library} PROPERTIES
+-    IMPORTED_LOCATION_NOCONFIG "${@PROJECT_NAME@_LIB_DIR}/lib${_imported_library}.so"
++    IMPORTED_LOCATION_NOCONFIG "${AWSSDK_ROOT_DIR}/lib/lib${_imported_library}.so"
+     IMPORTED_SONAME_NOCONFIG "lib${_imported_library}.so"
+   )
+  endif()

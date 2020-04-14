@@ -9,8 +9,10 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
 SRC_URI += " \
     file://0001-CMakeLists.txt-don-t-build-and-install-kvssdk.patch \
     file://0001-Link-libraries-only-if-test-targets-exist-36.patch \
+    file://0001-Fix-LIB_DIR.patch \
 "
 
-EXTRA_OECMAKE = "-DKVSSDK_EXTERNAL_LIB_DIR=${STAGING_DIR_HOST}${libdir} \
+EXTRA_OECMAKE = " \
+    -DKVSSDK_EXTERNAL_LIB_DIR=${STAGING_DIR_HOST}${libdir} \
     -DKVSSDK_EXTERNAL_INCLUDE_DIR=${STAGING_DIR_HOST}${includedir} \
 "

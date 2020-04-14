@@ -3,4 +3,4 @@
 inherit ros-insane
 
 # sophus PN is empty, so it wasn't created
-RDEPENDS_${PN}_remove = "sophus"
+RDEPENDS_${PN}_remove = "ros2-sophus"

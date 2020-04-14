@@ -9,3 +9,8 @@
 # |                                    ^
 # | cc1plus: all warnings being treated as errors
 CXXFLAGS += "-Wno-error=catch-value="
+
+# ERROR: ros2-file-management-1.1.2-1-r0 do_package_qa: QA Issue: -dev package contains non-symlink .so: ros2-file-management-dev path '/work/armv7at2hf-neon-fslc-linux-gnueabi/ros2-file-management/1.1.2-1-r0/packages-split/ros2-file-management-dev/usr/lib/libfile_management.so' [dev-elf]
+# ERROR: ros2-file-management-1.1.2-1-r0 do_package_qa: QA run found fatal errors. Please consider fixing them.
+FILES_SOLIBSDEV = ""
+FILES_${PN} += "${libdir}/*.so"

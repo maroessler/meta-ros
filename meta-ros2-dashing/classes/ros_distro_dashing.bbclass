@@ -7,6 +7,4 @@ ROS_DISTRO_TYPE = "ros2"
 ROS_VERSION = "2"
 ROS_PYTHON_VERSION = "3"
 
-ROS_DISTRO = "dashing"
-
 inherit ros2_distro
