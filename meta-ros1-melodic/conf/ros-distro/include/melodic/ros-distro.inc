@@ -23,10 +23,80 @@ require conf/ros-distro/include/melodic/ros-distro-preferred-providers.inc
 ROS_SUPERFLORE_GENERATED_BUILDTOOLS += " \
 "
 
+# roslisp depends on sbcl, for which there is no OE recipe
+ROS_WORLD_SKIP_GROUPS += "lisp"
+# recipes depending on gazebo, for which there is no OE recipe
+ROS_WORLD_SKIP_GROUPS += "gazebo"
+# recipes depending on wxpython
+ROS_WORLD_SKIP_GROUPS += "wxpython"
+# recipes depending on libnlopt0 (http://neuro.debian.net/pkgs/libnlopt0.html)
+ROS_WORLD_SKIP_GROUPS += "trac-ik"
+# recipes depending on libogre
+# there was ogre recipe in OE-classic 10 years ago:
+# https://github.com/openembedded/openembedded/blob/master/recipes/ogre/ogre-egl_svn.bb
+# but wasn'te ever ported to new layers
+ROS_WORLD_SKIP_GROUPS += "ogre"
+# recipes depending on python-pyassimp
+# there is assimp recipe in oe-core and older meta-ros:
+# http://cgit.openembedded.org/openembedded-core/commit/meta/recipes-graphics/vulkan/assimp_5.0.1.bb?id=ea43f8af4652d78546fee874606cf4093b11098e
+# https://github.com/ros/meta-ros/commit/5d71cc0abbc827719ffbbcb41db9cb5d71177401
+# but doesn't seem to provide python
+ROS_WORLD_SKIP_GROUPS += "pyassimp"
+# recipes depending on libvtk-qt
+ROS_WORLD_SKIP_GROUPS += "vtk-qt"
+# recipes depending on libopenscenegraph
+ROS_WORLD_SKIP_GROUPS += "osg"
+# recipes depending on various unavailable python modules
+# ERROR: Nothing PROVIDES 'UNRESOLVED-python-cairosvg' (but generated-recipes/fiducials/aruco-detect_0.11.0-1.bb DEPENDS on or otherwise requires it)
+# ERROR: Nothing PROVIDES 'UNRESOLVED-python-joblib' (but generated-recipes/fiducials/aruco-detect_0.11.0-1.bb DEPENDS on or otherwise requires it)
+# ERROR: Nothing PROVIDES 'UNRESOLVED-python-urlgrabber' (but generated-recipes/jsk-visualization/jsk-rqt-plugins_2.1.5.bb DEPENDS on or otherwise requires it)
+# ERROR: Nothing PROVIDES 'UNRESOLVED-python-sklearn' (but generated-recipes/jsk-visualization/jsk-rqt-plugins_2.1.5.bb DEPENDS on or otherwise requires it)
+# ERROR: Nothing PROVIDES 'UNRESOLVED-python-cairo' (but generated-recipes/rqt-bag/rqt-bag-plugins_0.4.12.bb DEPENDS on or otherwise requires it)
+# ERROR: Nothing PROVIDES 'UNRESOLVED-python-opengl' (but generated-recipes/rqt-pose-view/rqt-pose-view_0.5.8.bb DEPENDS on or otherwise requires it)
+# ERROR: Nothing RPROVIDES 'UNRESOLVED-python-termcolor' (but generated-recipes/criutils/criutils_0.1.3-2.bb RDEPENDS on or otherwise requires it)
+ROS_WORLD_SKIP_GROUPS += "python-deps"
+
+# recipes depending on something from meta-qt5 layer
+ROS_WORLD_SKIP_GROUPS += "${@bb.utils.contains('BBFILE_COLLECTIONS', 'qt5-layer', '', 'qt5', d)}"
+# recipes depending on something from meta-qt4 layer
+ROS_WORLD_SKIP_GROUPS += "${@bb.utils.contains('BBFILE_COLLECTIONS', 'qt4-layer', '', 'qt4', d)}"
+# recipes depending on something from meta-multimedia layer
+ROS_WORLD_SKIP_GROUPS += "${@bb.utils.contains('BBFILE_COLLECTIONS', 'multimedia-layer', '', 'multimedia', d)}"
+
+# recipes depending on 'x11' in DISTRO_FEATURES
+ROS_WORLD_SKIP_GROUPS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', 'x11', d)}"
+# recipes depending on 'opengl' in DISTRO_FEATURES
+ROS_WORLD_SKIP_GROUPS += "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', '', 'opengl', d)}"
+# recipes depending on 'ffmpeg' which is restricted by 'commercial' LICENSE_FLAG
+ROS_WORLD_SKIP_GROUPS += "${@ 'ffmpeg' if not d.getVar('LICENSE_FLAGS_WHITELIST') or 'commercial' not in d.getVar('LICENSE_FLAGS_WHITELIST').split() else ''}"
+# recipes depending on 'gstreamer1.0-plugins-ugly' which is restricted by 'commercial' LICENSE_FLAG
+ROS_WORLD_SKIP_GROUPS += "${@ 'gst-ugly' if not d.getVar('LICENSE_FLAGS_WHITELIST') or 'commercial' not in d.getVar('LICENSE_FLAGS_WHITELIST').split() else ''}"
+# recipes depending on vlc from meta-multimedia layer which depends on ffmpeg which has commercial LICENSE_FLAGS restriction
+ROS_WORLD_SKIP_GROUPS += "${@ 'vlc' if not d.getVar('LICENSE_FLAGS_WHITELIST') or 'commercial' not in d.getVar('LICENSE_FLAGS_WHITELIST').split() else ''}"
+
+# recipes depending on python*-pyqt5 from meta-qt5 layer
+# Use separate group, because e.g. webOS OSE has meta-qt5 layer included, but python*-pyqt5
+# is blacklisted, because webOS OSE is missing newer meta-qt5 from warrior with older meta-oe thud which has
+# incompatible old sip
+ROS_WORLD_SKIP_GROUPS += "${@bb.utils.contains('BBFILE_COLLECTIONS', 'qt5-layer', '', 'pyqt5', d)}"
+
+# if vc4graphics is enabled without opengl in DISTRO_FEATURES then
+# gstreamer1.0-plugins-base will be unbuildable for rpi MACHINEs, the
+# fix is already included in dunfell and backported to zeus:
+# https://github.com/agherzan/meta-raspberrypi/commit/71e188ecd572a00708805989bae71bf4e3ba0f3b
+# so this is needed only in warrior (and thud if you enabled vc4graphics
+# yourself, because it's included by default only since warrior)
+ROS_WORLD_SKIP_GROUPS_append_rpi = "${@ ' vc4graphics-without-opengl' if bb.utils.contains('MACHINE_FEATURES', 'vc4graphics', True, False, d) and not bb.utils.contains('DISTRO_FEATURES', 'opengl', True, False, d) else ''}"
+
 # Must use a _pn- override in this file to override the ROS_BUILD_TYPE of a generated recipe,
 # because we need to set this variable before the "inherit" line in the recipe is parsed,
 # and having it in a .bbappend sets it too late.
 ROS_BUILD_TYPE_pn-python-orocos-kdl = "catkin"
+
+# Otherwise it will use cmake as specified in
+# https://github.com/mavlink/mavlink-gbp-release/blob/release/melodic/mavlink/2019.11.11-1/package.xml#L29
+# but that doesn't respect the prefix set in meta-ros-common/classes/ros_opt_prefix.bbclass
+ROS_BUILD_TYPE_pn-mavlink = "catkin"
 
 # python-backports-ssl@meta-python
 ROS_UNRESOLVED_PLATFORM_PKG_python-backports.ssl-match-hostname = "python-backports-ssl"
@@ -269,13 +339,160 @@ ROS_UNRESOLVED_PLATFORM_PKG_libqt5-svg-dev = "qtsvg"
 ROS_UNRESOLVED_PLATFORM_PKG_libvlc-dev = "vlc"
 ROS_UNRESOLVED_PLATFORM_PKG_vlc = "vlc"
 
+# Used by:
+# generated-recipes/mavros/mavros_0.33.3-1.bb
+# generated-recipes/underwater-simulation/uwsim_1.4.2-1.bb
+# Just a package built by geographiclib
+ROS_UNRESOLVED_PLATFORM_PKG_geographiclib-tools = "geographiclib-tools"
+
+# Used by:
+# generated-recipes/webrtc-ros/webrtc_59.0.3.bb
+ROS_UNRESOLVED_PLATFORM_PKG_libglib-dev = "glib-2.0"
+
+# Used by:
+# generated-recipes/kobuki-core/kobuki-ftdi_0.7.8.bb
+ROS_UNRESOLVED_PLATFORM_PKG_ftdi-eeprom = "libftdi"
+
+# Used by:
+# generated-recipes/rc-dynamics-api/rc-dynamics-api_0.10.0-1.bb
+# generated-recipes/rc-visard/rc-visard-driver_2.7.0-1.bb
+ROS_UNRESOLVED_PLATFORM_PKG_protobuf = "protobuf"
+
+# Used by:
+# generated-recipes/yp-spur/ypspur_1.17.1-1.bb
+ROS_UNRESOLVED_PLATFORM_PKG_libreadline-dev = "readline"
+ROS_UNRESOLVED_PLATFORM_PKG_libreadline = "readline"
+
+# Used by:
+# generated-recipes/robot-upstart/robot-upstart_0.3.0.bb
+ROS_UNRESOLVED_PLATFORM_PKG_daemontools = "daemontools"
+
+# Used by:
+# generated-recipes/moveit/moveit-kinematics_1.0.2-1.bb
+ROS_UNRESOLVED_PLATFORM_PKG_liburdfdom-tools = "urdfdom"
+
+# Used by:
+# generated-recipes/python-qt-binding/python-qt-binding_0.3.6-2.bb
+# generated-recipes/qt-gui-core/qt-gui_0.3.16-1.bb
+# generated-recipes/visualstates/visualstates_0.2.3-2.bb
+ROS_UNRESOLVED_PLATFORM_PKG_python-qt5-bindings = "python-pyqt5"
+ROS_UNRESOLVED_PLATFORM_PKG_python3-qt5-bindings = "python3-pyqt5"
+
+# Used by:
+# generated-recipes/webkit-dependency/webkit-dependency_1.1.0.bb
+ROS_UNRESOLVED_PLATFORM_PKG_python-qt5-bindings-webkit = "python-pyqt5"
+ROS_UNRESOLVED_PLATFORM_PKG_python3-qt5-bindings-webkit = "python3-pyqt5"
+
+# Used by:
+# generated-recipes/visualstates/visualstates_0.2.3-2.bb
+ROS_UNRESOLVED_PLATFORM_PKG_python-qt5-bindings-qsci = "python-pyqt5"
+ROS_UNRESOLVED_PLATFORM_PKG_python3-qt5-bindings-qsci = "python3-pyqt5"
+
+# Used by:
+# generated-recipes/gl-dependency/gl-dependency_1.1.0.bb
+ROS_UNRESOLVED_PLATFORM_PKG_python-qt5-bindings-gl = "python-pyqt5"
+ROS_UNRESOLVED_PLATFORM_PKG_python3-qt5-bindings-gl = "python3-pyqt5"
+
+# tango-icon-theme isn't available, but adwaita-icon-theme should be compatible
+# Used by:
+# generated-recipes/qt-gui-core/qt-gui_0.3.16-1.bb
+ROS_UNRESOLVED_PLATFORM_PKG_tango-icon-theme = "adwaita-icon-theme"
+
+# Used by:
+# generated-recipes/rviz-visual-tools/rviz-visual-tools_3.8.0-4.bb
+ROS_UNRESOLVED_PLATFORM_PKG_libqt5x11extras5-dev = "qtx11extras"
+
+# Used by:
+# generated-recipes/mapviz/mapviz_1.2.0-1.bb
+# generated-recipes/mapviz/tile-map_1.2.0-1.bb
+# generated-recipes/moveit/moveit-ros-perception_1.0.2-1.bb
+ROS_UNRESOLVED_PLATFORM_PKG_libglew-dev = "glew"
+
+# Used by:
+# generated-recipes/uwsim-bullet/uwsim-bullet_2.82.2-1.bb
+ROS_UNRESOLVED_PLATFORM_PKG_libxext = "libxext"
+
+# Used by:
+# generated-recipes/lvr2/lvr2_19.12.1-1.bb
+# generated-recipes/mapviz/mapviz_1.2.0-1.bb
+ROS_UNRESOLVED_PLATFORM_PKG_libxmu-dev = "libxmu"
+
+# Used by:
+# generated-recipes/lvr2/lvr2_19.12.1-1.bb
+# generated-recipes/mapviz/mapviz_1.2.0-1.bb
+ROS_UNRESOLVED_PLATFORM_PKG_libxi-dev = "libxi"
+
+# Used by:
+# generated-recipes/marti-common/swri-transform-util_2.11.0-1.bb
+# generated-recipes/marti-common/swri-geometry-util_2.11.0-1.bb
+ROS_UNRESOLVED_PLATFORM_PKG_libgeos++-dev = "geos"
+
+# Used by:
+# generated-recipes/stage/stage_4.3.0.bb
+ROS_UNRESOLVED_PLATFORM_PKG_libfltk-dev = "fltk"
+
+# Used by:
+# generated-recipes/fkie-potree-rviz-plugin/fkie-potree-rviz-plugin_1.0.0.bb
+# generated-recipes/mapviz/tile-map_1.2.0-1.bb
+ROS_UNRESOLVED_PLATFORM_PKG_libjsoncpp-dev = "jsoncpp"
+ROS_UNRESOLVED_PLATFORM_PKG_libjsoncpp = "jsoncpp"
+
+# Used by:
+# generated-recipes/plotjuggler/plotjuggler_2.5.0-1.bb
+# generated-recipes/kvh-geo-fog-3d/kvh-geo-fog-3d-rviz_1.3.3-1.bb
+ROS_UNRESOLVED_PLATFORM_PKG_libqt5multimedia5-plugins = "qtmultimedia"
+
+# Used by:
+# generated-recipes/plotjuggler/plotjuggler_2.5.0-1.bb
+# generated-recipes/kvh-geo-fog-3d/kvh-geo-fog-3d-rviz_1.3.3-1.bb
+ROS_UNRESOLVED_PLATFORM_PKG_qtmultimedia5-dev = "qtmultimedia"
+
+# Used by:
+# generated-recipes/plotjuggler/plotjuggler_2.5.0-1.bb
+# generated-recipes/kvh-geo-fog-3d/kvh-geo-fog-3d-rviz_1.3.3-1.bb
+ROS_UNRESOLVED_PLATFORM_PKG_qtdeclarative5-dev = "qtdeclarative"
+
+# Used by:
+# generated-recipes/plotjuggler/plotjuggler_2.5.0-1.bb
+ROS_UNRESOLVED_PLATFORM_PKG_binutils = "binutils"
+
+# Used by:
+# generated-recipes/uwsim-osgocean/uwsim-osgocean_1.0.4-1.bb
+ROS_UNRESOLVED_PLATFORM_PKG_libfftw3 = "fftw"
+
+# Used by:
+# generated-recipes/rqt-multiplot-plugin/rqt-multiplot_0.0.10.bb
+ROS_UNRESOLVED_PLATFORM_PKG_libqwt-qt5-dev = "qwt-qt5"
+
+# Used by:
+# generated-recipes/qt-gui-core/qt-dotgraph_0.3.16-1.bb
+ROS_UNRESOLVED_PLATFORM_PKG_python-pydot = "python-pydot"
+
+# Used by:
+# generated-recipes/ros/roslib_1.14.8-1.bb
+ROS_UNRESOLVED_PLATFORM_PKG_libboost-thread-dev = "boost"
+
+# Used by:
+# generated-recipes/ros-comm/rosbag_1.14.5-1.bb
+ROS_UNRESOLVED_PLATFORM_PKG_python-pycryptodome = "python-pycryptodomex"
+
+# Used by:
+# generated-recipes/parrot-arsdk/parrot-arsdk_3.14.1.bb
+ROS_UNRESOLVED_PLATFORM_PKG_nasm = "nasm"
+
+# Used by:
+# generated-recipes/parrot-arsdk/parrot-arsdk_3.14.1.bb
+ROS_UNRESOLVED_PLATFORM_PKG_yasm = "yasm"
+
+# Used by:
+# generated-recipes/usb-cam/usb-cam_3.14.1.bb
+ROS_UNRESOLVED_PLATFORM_PKG_v4l-utils = "v4l-utils"
+
 #ROS_UNRESOLVED_PLATFORM_PKG_arduino-core = "arduino-core"
 ROS_UNRESOLVED_PLATFORM_PKG_bluez = "bluez5"
 ROS_UNRESOLVED_PLATFORM_PKG_clang-tidy = "clang-tidy"
 #ROS_UNRESOLVED_PLATFORM_PKG_coinor-libipopt-dev = "coinor-libipopt-dev"
 #ROS_UNRESOLVED_PLATFORM_PKG_cwiid-dev = "cwiid-dev"
-#ROS_UNRESOLVED_PLATFORM_PKG_ftdi-eeprom = "ftdi-eeprom"
-#ROS_UNRESOLVED_PLATFORM_PKG_geographiclib-tools = "geographiclib-tools"
 #ROS_UNRESOLVED_PLATFORM_PKG_gforth = "gforth"
 #ROS_UNRESOLVED_PLATFORM_PKG_gfortran = "gfortran"
 ROS_UNRESOLVED_PLATFORM_PKG_libasound2-dev = "alsa-lib"
@@ -287,7 +504,6 @@ ROS_UNRESOLVED_PLATFORM_PKG_libftdi-dev = "libftdi"
 # with cpp-wrapper PACKAGECONFIG enabled
 ROS_UNRESOLVED_PLATFORM_PKG_libftdipp-dev = "libftdi"
 #ROS_UNRESOLVED_PLATFORM_PKG_libgeos++-dev = "libgeos++-dev"
-ROS_UNRESOLVED_PLATFORM_PKG_libglib-dev = "libglib-2.0"
 ROS_UNRESOLVED_PLATFORM_PKG_libgphoto-dev = "libgphoto2"
 ROS_UNRESOLVED_PLATFORM_PKG_libgps = "gpsd"
 #ROS_UNRESOLVED_PLATFORM_PKG_libgts = "libgts"
@@ -307,11 +523,9 @@ ROS_UNRESOLVED_PLATFORM_PKG_libncurses-dev = "ncurses"
 ROS_UNRESOLVED_PLATFORM_PKG_libpng-dev = "libpng"
 #ROS_UNRESOLVED_PLATFORM_PKG_libpng12-dev = "libpng12-dev"
 ROS_UNRESOLVED_PLATFORM_PKG_libpulse-dev = "pulseaudio"
-ROS_UNRESOLVED_PLATFORM_PKG_libreadline-dev = "readline"
 ROS_UNRESOLVED_PLATFORM_PKG_libsensors4-dev = "lmsensors"
 #ROS_UNRESOLVED_PLATFORM_PKG_libspnav-dev = "libspnav-dev"
 ROS_UNRESOLVED_PLATFORM_PKG_libv4l-dev = "v4l-utils"
-#ROS_UNRESOLVED_PLATFORM_PKG_libvtk-qt = "libvtk-qt"
 ROS_UNRESOLVED_PLATFORM_PKG_mongodb = "mongodb"
 #ROS_UNRESOLVED_PLATFORM_PKG_muparser = "muparser"
 #ROS_UNRESOLVED_PLATFORM_PKG_npm-native = "npm-native"

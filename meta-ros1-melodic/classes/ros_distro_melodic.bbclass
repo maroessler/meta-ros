@@ -13,3 +13,5 @@ inherit ros1_distro
 #ROS_EXEC_DEPENDS_remove = "${@bb.utils.contains('BBFILE_COLLECTIONS', 'qt5-layer', '', 'python-qt-binding', d)}"
 # XXX TEMP until "python-qt-binding" builds
 ROS_EXEC_DEPENDS_remove = "python-qt-binding"
+
+require conf/ros-distro/include/melodic/ros-distro.inc
