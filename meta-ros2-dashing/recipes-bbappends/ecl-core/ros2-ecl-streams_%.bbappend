@@ -3,4 +3,4 @@
 CXXFLAGS += "-Wno-unused-local-typedefs"
 FILES_${PN} += "${ros_prefix}/lib"
 
-inherit ros-insane
+inherit ros_insane_dev_so
