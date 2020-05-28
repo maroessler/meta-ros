@@ -1,0 +1,13 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 55686b8..83dbe82 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -78,6 +78,8 @@ include_directories(${THIS_PACKAGE_INCLUDE_DIRS}
+                     ${Boost_INCLUDE_DIRS}
+                     ${catkin_INCLUDE_DIRS})
+ 
++set(PYTHON_INCLUDE_DIRS ${PYTHON_INCLUDE_DIRS} $ENV{RECIPE_SYSROOT}$ENV{libdir}/$ENV{PYTHON_DIR}/site-packages/numpy/core/include)
++
+ include_directories(SYSTEM
+                     ${EIGEN3_INCLUDE_DIRS}
+                     ${PYTHON_INCLUDE_DIRS})

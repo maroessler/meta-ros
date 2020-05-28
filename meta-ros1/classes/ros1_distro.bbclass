@@ -10,3 +10,24 @@ SSTATE_SCAN_FILES_append = " *.cmake"
 
 DEPENDS_remove =  "${@bb.utils.contains('DISTRO_FEATURES', 'ros-rviz', '', 'rviz', d)}"
 RDEPENDS_${PN}_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'ros-rviz', '', 'rviz', d)}"
+
+# TODO
+# for some reason do_package_qa throws a warning that some ros1 packages depend on ros2
+# don't know how to resolve that better for now
+PRIVATE_LIBS_${PN} += "\
+    libkdl_parser.so \
+    libtf2_ros.so \
+    libasync_web_server_cpp.so \
+    libimage_transport.so \
+    libclass_loader.so \
+    libcv_bridge.so \
+    liburdfdom_model.so.1.0 \
+    liburdfdom_world.so.1.0 \
+    libresource_retriever.so \
+    libvoxel_grid.so \
+    libdynamixel_sdk.so \
+    libDepthImageToLaserScanROS.so \
+    libDepthImageToLaserScan.so \
+    liboctomap.so.1.9 \
+    liboctomath.so.1.9 \
+"

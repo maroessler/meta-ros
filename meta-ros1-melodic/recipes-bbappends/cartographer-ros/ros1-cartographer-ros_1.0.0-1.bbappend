@@ -8,3 +8,7 @@ SRC_URI += " \
 # This is used only to generate documentation so it should
 # be native and needs quite a lot of native python dependencies
 ROS_BUILD_DEPENDS_remove = "${PYTHON_PN}-sphinx"
+
+ROS_EXEC_DEPENDS_append = " \
+    urdfdom \
+"
