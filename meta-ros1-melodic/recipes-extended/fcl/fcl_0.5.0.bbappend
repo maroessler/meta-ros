@@ -5,3 +5,8 @@ EXTRA_OECMAKE_prepend = "\
 "
 
 DEPENDS += "ros1-octomap"
+
+# For some reason ends with bad RPATH
+do_install_append() {
+    chrpath --delete ${D}${libdir}/*${SOLIBS}
+}
