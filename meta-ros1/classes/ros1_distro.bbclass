@@ -14,6 +14,7 @@ RDEPENDS_${PN}_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'ros-rviz', '',
 # TODO
 # for some reason do_package_qa throws a warning that some ros1 packages depend on ros2
 # don't know how to resolve that better for now
+# WARNING: ros1-moveit-planners-ompl-1.0.2-1-r0 do_package_qa: QA Issue: ros1-moveit-planners-ompl rdepends on ros2-ompl, but it isn't a build dependency, missing ros2-ompl in DEPENDS or PACKAGECONFIG? [build-deps]
 PRIVATE_LIBS_${PN} += "\
     libkdl_parser.so \
     libtf2_ros.so \
@@ -30,4 +31,5 @@ PRIVATE_LIBS_${PN} += "\
     libDepthImageToLaserScan.so \
     liboctomap.so.1.9 \
     liboctomath.so.1.9 \
+    libompl.so.15 \
 "

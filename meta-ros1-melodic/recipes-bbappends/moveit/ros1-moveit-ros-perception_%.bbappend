@@ -10,8 +10,11 @@ do_configure_append() {
     sed -i 's/-isystem /-I/g' ${B}/build.ninja
 }
 
-EXTRA_OECMAKE += "-DWITH_OPENGL=OFF"
+EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', '-DWITH_OPENGL=OFF', d)}"
 
 ROS_BUILD_DEPENDS_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', 'freeglut', d)}"
 ROS_EXPORT_DEPENDS_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', 'freeglut', d)}"
 ROS_EXEC_DEPENDS_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', 'freeglut', d)}"
+
+# mesa is recipe name, shouldn't be used in runtime dependencies
+ROS_EXEC_DEPENDS_remove = "mesa"
