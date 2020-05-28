@@ -9,7 +9,6 @@ DEPENDS = " \
     suitesparse-config \
 "
 
-
 S = "${WORKDIR}/SuiteSparse/AMD"
 
 EXTRA_OEMAKE = "CC='${CC}'"

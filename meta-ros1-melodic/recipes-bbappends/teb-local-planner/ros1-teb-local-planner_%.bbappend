@@ -1,5 +1,14 @@
 # Copyright (c) 2020 LG Electronics, Inc.
 
+ROS_BUILD_DEPENDS += "\
+    suitesparse-btf \
+    suitesparse-klu \
+    suitesparse-umfpack \
+"
+
+ROS_EXEC_DEPENDS_append = " \
+"
+
 do_configure_append() {
     # Fixes this:
     # teb-local-planner/0.8.4-1-r0/recipe-sysroot/usr/include/c++/8.2.0/cmath:45:15: fatal error: math.h: No such file or directory
