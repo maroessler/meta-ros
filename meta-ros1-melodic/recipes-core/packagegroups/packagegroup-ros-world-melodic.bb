@@ -195,8 +195,6 @@ ROS_SUPERFLORE_GENERATED_WORLD_PACKAGES_DEPENDING_ON_VTK_QT = " \
     ros1-ira-laser-tools \
     ros1-lvr2 \
     ros1-rc-cloud-accumulator \
-    ros1-rtabmap \
-    ros1-rtabmap-ros \
     ros1-simple-grasping \
 "
 
@@ -631,7 +629,6 @@ ROS_SUPERFLORE_GENERATED_WORLD_PACKAGES_DEPENDING_ON_META_QT5 = " \
     ros1-rqt-top \
     ros1-rqt-topic \
     ros1-rqt-web \
-    ros1-rtabmap-ros \
     ros1-rviz \
     ros1-rviz-imu-plugin \
     ros1-rviz-plugin-tutorials \
