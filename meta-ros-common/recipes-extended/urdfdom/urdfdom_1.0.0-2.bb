@@ -42,3 +42,11 @@ do_configure_append() {
 
 # *.cmake files have hardcoded sysroot-s in them.
 SSTATE_SCAN_FILES_append = " *.cmake"
+
+# TODO
+# for some reason do_package_qa throws a warning that some ros1 packages depend on ros2
+# don't know how to resolve that better for now
+# DEBUG: urdfdom: Dependency liburdfdom_model.so.1.0 requires package ros2-urdfdom (used by files: /home/roverman/rover-yocto/var-fslc-yocto/build/tmp/work/armv7at2hf-neon-fslc-linux-gnueabi/urdfdom/1.0.0-2-r0/packages-split/urdfdom/usr/bin/urdf_mem_test)
+PRIVATE_LIBS_${PN} += "\
+    liburdfdom_model.so.1.0 \
+"
