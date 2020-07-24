@@ -100,6 +100,8 @@ git:
 - git@openembedded-core
 glut:
 - freeglut@meta-oe
+gnuplot:
+- ${ROS_UNRESOLVED_PLATFORM_PKG_gnuplot}
 google-mock:
 - gtest@meta-oe
 graphviz:
@@ -122,6 +124,8 @@ hddtemp:
 - hddtemp@meta-oe
 hostapd:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_hostapd}
+hostname:
+- ${ROS_UNRESOLVED_PLATFORM_PKG_hostname}
 ifstat:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_ifstat}
 ipmitool:
@@ -136,8 +140,6 @@ joystick:
 - joystick@meta-ros
 julius-voxforge:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_julius-voxforge}
-jython:
-- ${ROS_UNRESOLVED_PLATFORM_PKG_jython}
 lcov:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_lcov}
 leveldb:
@@ -154,6 +156,8 @@ libboost-date-time-dev:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_libboost-date-time-dev}
 libboost-filesystem-dev:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_libboost-filesystem-dev}
+libboost-python-dev:
+- ${ROS_UNRESOLVED_PLATFORM_PKG_libboost-python-dev}
 libboost-thread-dev:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_libboost-thread-dev}
 libcairo2-dev:
@@ -176,6 +180,8 @@ libdw-dev:
 - elfutils@openembedded-core
 libfcl-dev:
 - fcl@meta-ros
+libffi-dev:
+- ${ROS_UNRESOLVED_PLATFORM_PKG_libffi-dev}
 libfftw3:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_libfftw3}
 libflann-dev:
@@ -196,6 +202,8 @@ libgflags-dev:
 - gflags@meta-oe
 libglew-dev:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_libglew-dev}
+libglfw3-dev:
+- glfw@meta-intel-realsense
 libglib-dev:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_libglib-dev}
 libgoogle-glog-dev:
@@ -216,6 +224,8 @@ libgts:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_libgts}
 libhdf5-dev:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_libhdf5-dev}
+libirrlicht-dev:
+- ${ROS_UNRESOLVED_PLATFORM_PKG_libirrlicht-dev}
 libjpeg:
 - jpeg@openembedded-core
 libjsoncpp:
@@ -272,6 +282,10 @@ libpoco-dev:
 - poco@meta-oe
 libpq-dev:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_libpq-dev}
+libpqxx:
+- ${ROS_UNRESOLVED_PLATFORM_PKG_libpqxx}
+libpqxx-dev:
+- ${ROS_UNRESOLVED_PLATFORM_PKG_libpqxx-dev}
 libpulse-dev:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_libpulse-dev}
 libqglviewer-qt4:
@@ -310,6 +324,8 @@ libqtgui4:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_libqtgui4}
 libqwt-qt5-dev:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_libqwt-qt5-dev}
+libraw1394-dev:
+- ${ROS_UNRESOLVED_PLATFORM_PKG_libraw1394-dev}
 libreadline:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_libreadline}
 libreadline-dev:
@@ -364,10 +380,12 @@ libxmlrpc-c++:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_libxmlrpc-c++}
 libxmu-dev:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_libxmu-dev}
+libxrandr:
+- libxrandr@openembedded-core
+libxxf86vm:
+- ${ROS_UNRESOLVED_PLATFORM_PKG_libxxf86vm}
 libzmq3-dev:
 - zeromq@meta-oe
-linux-headers-generic:
-- virtual/kernel@openembedded-core
 linux-kernel-headers:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_linux-kernel-headers}
 log4cplus:
@@ -388,6 +406,8 @@ muparser:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_muparser}
 nasm:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_nasm}
+net-tools:
+- ${ROS_UNRESOLVED_PLATFORM_PKG_net-tools}
 netpbm:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_netpbm}
 network-manager:
@@ -404,6 +424,8 @@ ocl-icd-opencl-dev:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_ocl-icd-opencl-dev}
 omniorb:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_omniorb}
+opencl-headers:
+- ${ROS_UNRESOLVED_PLATFORM_PKG_opencl-headers}
 opengl:
 - mesa@openembedded-core
 openssl:
@@ -416,14 +438,22 @@ phantomjs:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_phantomjs}
 pkg-config:
 - pkgconfig@openembedded-core
+postgresql:
+- ${ROS_UNRESOLVED_PLATFORM_PKG_postgresql}
 postgresql-postgis:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_postgresql-postgis}
+procps:
+- ${ROS_UNRESOLVED_PLATFORM_PKG_procps}
 proj:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_proj}
 protobuf:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_protobuf}
 protobuf-dev:
 - protobuf@meta-oe
+pugixml-dev:
+- ${ROS_UNRESOLVED_PLATFORM_PKG_pugixml-dev}
+pydrive-pip:
+- ${ROS_UNRESOLVED_PLATFORM_PKG_pydrive-pip}
 python:
 - python@openembedded-core
 python-argcomplete:
@@ -440,7 +470,7 @@ python-bluez:
 python-boto3:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-boto3}
 python-bson:
-- ${PYTHON_PN}-pymongo@meta-python
+- python-pymongo@meta-python
 python-cairo:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-cairo}
 python-cairosvg:
@@ -448,9 +478,9 @@ python-cairosvg:
 python-catkin-lint:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-catkin-lint}
 python-catkin-pkg:
-- ${PYTHON_PN}-catkin-pkg@meta-ros
+- python-catkin-pkg@meta-ros
 python-catkin-pkg-modules:
-- ${PYTHON_PN}-catkin-pkg@meta-ros
+- python-catkin-pkg@meta-ros
 python-catkin-tools:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-catkin-tools}
 python-chainer-pip:
@@ -470,7 +500,11 @@ python-coverage:
 python-cwiid:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-cwiid}
 python-defusedxml:
-- ${PYTHON_PN}-defusedxml@meta-ros
+- python-defusedxml@meta-ros
+python-dev:
+- ${ROS_UNRESOLVED_PLATFORM_PKG_python-dev}
+python-dialogflow-pip:
+- ${ROS_UNRESOLVED_PLATFORM_PKG_python-dialogflow-pip}
 python-dlib:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-dlib}
 python-docker:
@@ -480,15 +514,15 @@ python-docopt:
 python-docutils:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-docutils}
 python-empy:
-- ${PYTHON_PN}-empy@meta-ros
+- python-empy@meta-ros
 python-enum34:
-- ${PYTHON_PN}-enum34@meta-python
+- python-enum34@meta-python
 python-fcn-pip:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-fcn-pip}
 python-freezegun-pip:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-freezegun-pip}
 python-future:
-- ${PYTHON_PN}-future@meta-python
+- python-future@meta-python
 python-gdown-pip:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-gdown-pip}
 python-gi:
@@ -496,7 +530,7 @@ python-gi:
 python-gi-cairo:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-gi-cairo}
 python-gnupg:
-- ${PYTHON_PN}-gnupg@meta-ros
+- python-gnupg@meta-ros
 python-gtk2:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-gtk2}
 python-h5py:
@@ -514,7 +548,7 @@ python-kitchen:
 python-libpgm-pip:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-libpgm-pip}
 python-lxml:
-- ${PYTHON_PN}-lxml@meta-python
+- python-lxml@meta-python
 python-mapnik:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-mapnik}
 python-matplotlib:
@@ -522,15 +556,15 @@ python-matplotlib:
 python-mechanize:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-mechanize}
 python-mock:
-- ${PYTHON_PN}-mock@meta-python
+- python-mock@meta-python
 python-msgpack:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-msgpack}
 python-netifaces:
-- ${PYTHON_PN}-netifaces@meta-ros
+- python-netifaces@meta-ros
 python-nose:
-- ${PYTHON_PN}-nose@openembedded-core
+- python-nose@openembedded-core
 python-numpy:
-- ${PYTHON_PN}-numpy@openembedded-core
+- python-numpy@openembedded-core
 python-omniorb:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-omniorb}
 python-opencv:
@@ -542,7 +576,7 @@ python-packaging:
 python-pandas:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-pandas}
 python-paramiko:
-- ${PYTHON_PN}-paramiko@meta-ros
+- python-paramiko@meta-ros
 python-pcapy:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-pcapy}
 python-pep8:
@@ -551,10 +585,12 @@ python-percol:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-percol}
 python-pip:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-pip}
+python-pixel-ring-pip:
+- ${ROS_UNRESOLVED_PLATFORM_PKG_python-pixel-ring-pip}
 python-progressbar:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-progressbar}
 python-psutil:
-- ${PYTHON_PN}-psutil@meta-python
+- python-psutil@meta-python
 python-pyassimp:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-pyassimp}
 python-pyaudio:
@@ -573,6 +609,8 @@ python-pyproj:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-pyproj}
 python-pytest:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-pytest}
+python-pytest-cov:
+- ${ROS_UNRESOLVED_PLATFORM_PKG_python-pytest-cov}
 python-pyusb-pip:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-pyusb-pip}
 python-qt5-bindings:
@@ -588,19 +626,21 @@ python-requests:
 python-requests-oauthlib:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-requests-oauthlib}
 python-rosdep:
-- ${PYTHON_PN}-rosdep@meta-ros
+- python-rosdep@meta-ros
 python-rosdep-modules:
-- ${PYTHON_PN}-rosdep@meta-ros
+- python-rosdep@meta-ros
 python-rospkg:
-- ${PYTHON_PN}-rospkg@meta-ros
+- python-rospkg@meta-ros
+python-rospkg-modules:
+- ${ROS_UNRESOLVED_PLATFORM_PKG_python-rospkg-modules}
 python-scipy:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-scipy}
 python-selenium-pip:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-selenium-pip}
 python-serial:
-- ${PYTHON_PN}-pyserial@meta-python
+- python-pyserial@meta-python
 python-setuptools:
-- ${PYTHON_PN}-setuptools@openembedded-core
+- python-setuptools@openembedded-core
 python-simplejson:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-simplejson}
 python-sip:
@@ -616,7 +656,7 @@ python-slacker-cli:
 python-speechrecognition-pip:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-speechrecognition-pip}
 python-sphinx:
-- ${PYTHON_PN}-sphinx@meta-ros
+- python-sphinx@meta-ros
 python-tabulate-pip:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-tabulate-pip}
 python-termcolor:
@@ -633,6 +673,8 @@ python-twisted-core:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-twisted-core}
 python-urlgrabber:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-urlgrabber}
+python-usb:
+- ${ROS_UNRESOLVED_PLATFORM_PKG_python-usb}
 python-virtualenv:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_python-virtualenv}
 python-websocket:
@@ -640,7 +682,7 @@ python-websocket:
 python-wxtools:
 - wxpython@meta-oe
 python-yaml:
-- ${PYTHON_PN}-pyyaml@meta-python
+- python-pyyaml@meta-python
 python3-catkin-pkg-modules:
 - python3-catkin-pkg@meta-ros
 python3-dev:
@@ -676,8 +718,8 @@ sshpass:
 subversion:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_subversion}
 suitesparse:
-- suitesparse-cholmod@meta-ros
 - suitesparse-cxsparse@meta-ros
+- suitesparse-cholmod@meta-ros
 swig:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_swig}
 sysstat:
@@ -722,6 +764,8 @@ xterm:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_xterm}
 xvfb:
 - ${ROS_UNRESOLVED_PLATFORM_PKG_xvfb}
+yaml:
+- libyaml@openembedded-core
 yaml-cpp:
 - yaml-cpp@meta-ros
 yasm:
