@@ -12,9 +12,9 @@ ROS_DISTRO_BASELINE_PLATFORM = "ubuntu-bionic"
 
 require conf/ros-distro/include/dashing/generated/superflore-datetime.inc
 require conf/ros-distro/include/dashing/generated/superflore-ros-distro.inc
-require conf/ros-distro/include/dashing/ros-distro-recipe-blacklist.inc
-require conf/ros-distro/include/dashing/ros-distro-preferred-versions.inc
-require conf/ros-distro/include/dashing/ros-distro-preferred-providers.inc
+# require conf/ros-distro/include/dashing/ros-distro-recipe-blacklist.inc
+# require conf/ros-distro/include/dashing/ros-distro-preferred-versions.inc
+# require conf/ros-distro/include/dashing/ros-distro-preferred-providers.inc
 
 # alternative not yet supported implementation for fastrtps
 ROS_WORLD_SKIP_GROUPS += "connext"
@@ -195,25 +195,25 @@ ROS_UNRESOLVED_PLATFORM_PKG_python-virtualenv-native = "python3-virtualenv-nativ
 # Must use a _pn- override in this file to override the ROS_BUILD_TYPE of a generated recipe,
 # because we need to set this variable before the "inherit" line in the recipe is parsed,
 # and having it in a .bbappend sets it too late.
-ROS_BUILD_TYPE_pn-async-web-server-cpp = "ament_cmake"
-ROS_BUILD_TYPE_pn-astuff-sensor-msgs = "ament_cmake"
-ROS_BUILD_TYPE_pn-automotive-autonomy-msgs = "ament_cmake"
-ROS_BUILD_TYPE_pn-automotive-navigation-msgs = "ament_cmake"
-ROS_BUILD_TYPE_pn-automotive-platform-msgs = "ament_cmake"
-ROS_BUILD_TYPE_pn-delphi-esr-msgs = "ament_cmake"
-ROS_BUILD_TYPE_pn-delphi-mrr-msgs = "ament_cmake"
-ROS_BUILD_TYPE_pn-delphi-srr-msgs = "ament_cmake"
-ROS_BUILD_TYPE_pn-derived-object-msgs = "ament_cmake"
-ROS_BUILD_TYPE_pn-fmilibrary-vendor = "ament_cmake"
-ROS_BUILD_TYPE_pn-geographic-info = "ament_cmake"
-ROS_BUILD_TYPE_pn-gps-umd = "ament_cmake"
-ROS_BUILD_TYPE_pn-ibeo-msgs = "ament_cmake"
-ROS_BUILD_TYPE_pn-kartech-linear-actuator-msgs = "ament_cmake"
-ROS_BUILD_TYPE_pn-ml-classifiers = "ament_cmake"
-ROS_BUILD_TYPE_pn-mobileye-560-660-msgs = "ament_cmake"
-ROS_BUILD_TYPE_pn-neobotix-usboard-msgs = "ament_cmake"
-ROS_BUILD_TYPE_pn-pacmod-msgs = "ament_cmake"
-ROS_BUILD_TYPE_pn-radar-msgs = "ament_cmake"
-ROS_BUILD_TYPE_pn-ros-workspace = "ament_cmake"
-ROS_BUILD_TYPE_pn-sros2-cmake = "ament_cmake"
-ROS_BUILD_TYPE_pn-web-video-server = "ament_cmake"
+ROS_BUILD_TYPE_pn-ros2-async-web-server-cpp = "ament_cmake"
+ROS_BUILD_TYPE_pn-ros2-astuff-sensor-msgs = "ament_cmake"
+ROS_BUILD_TYPE_pn-ros2-automotive-autonomy-msgs = "ament_cmake"
+ROS_BUILD_TYPE_pn-ros2-automotive-navigation-msgs = "ament_cmake"
+ROS_BUILD_TYPE_pn-ros2-automotive-platform-msgs = "ament_cmake"
+ROS_BUILD_TYPE_pn-ros2-delphi-esr-msgs = "ament_cmake"
+ROS_BUILD_TYPE_pn-ros2-delphi-mrr-msgs = "ament_cmake"
+ROS_BUILD_TYPE_pn-ros2-delphi-srr-msgs = "ament_cmake"
+ROS_BUILD_TYPE_pn-ros2-derived-object-msgs = "ament_cmake"
+ROS_BUILD_TYPE_pn-ros2-fmilibrary-vendor = "ament_cmake"
+ROS_BUILD_TYPE_pn-ros2-geographic-info = "ament_cmake"
+ROS_BUILD_TYPE_pn-ros2-gps-umd = "ament_cmake"
+ROS_BUILD_TYPE_pn-ros2-ibeo-msgs = "ament_cmake"
+ROS_BUILD_TYPE_pn-ros2-kartech-linear-actuator-msgs = "ament_cmake"
+ROS_BUILD_TYPE_pn-ros2-ml-classifiers = "ament_cmake"
+ROS_BUILD_TYPE_pn-ros2-mobileye-560-660-msgs = "ament_cmake"
+ROS_BUILD_TYPE_pn-ros2-neobotix-usboard-msgs = "ament_cmake"
+ROS_BUILD_TYPE_pn-ros2-pacmod-msgs = "ament_cmake"
+ROS_BUILD_TYPE_pn-ros2-radar-msgs = "ament_cmake"
+ROS_BUILD_TYPE_pn-ros2-ros-workspace = "ament_cmake"
+ROS_BUILD_TYPE_pn-ros2-sros2-cmake = "ament_cmake"
+ROS_BUILD_TYPE_pn-ros2-web-video-server = "ament_cmake"

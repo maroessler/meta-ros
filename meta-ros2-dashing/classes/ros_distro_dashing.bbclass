@@ -3,5 +3,10 @@
 # Copyright (c) 2019 LG Electronics, Inc.
 
 ROS_DISTRO = "dashing"
+ROS_DISTRO_TYPE = "ros2"
+ROS_VERSION = "2"
+ROS_PYTHON_VERSION = "3"
 
-inherit ${ROS_DISTRO_TYPE}_distro
+inherit ros2_distro
+
+require conf/ros-distro/include/dashing/ros-distro.inc

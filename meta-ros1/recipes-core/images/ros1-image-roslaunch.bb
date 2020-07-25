@@ -6,10 +6,10 @@ IMAGE_LINGUAS = " "
 
 LICENSE = "MIT"
 
-inherit core-image
-inherit ros_distro_${ROS_DISTRO}
-inherit ${ROS_DISTRO_TYPE}_image
+# inherit core-image
+# inherit ros_distro_${ROS_DISTRO}
+# inherit ${ROS_DISTRO_TYPE}_image
 
-IMAGE_ROOTFS_SIZE = "8192"
+# IMAGE_ROOTFS_SIZE = "8192"
 
-IMAGE_INSTALL_append = " roslaunch"
+# IMAGE_INSTALL_append = " roslaunch"

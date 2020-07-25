@@ -1,8 +1,8 @@
 # Copyright (c) 2019 LG Electronics, Inc.
 
 ROS_BUILDTOOL_DEPENDS += " \
-    rosidl-parser-native \
-    rosidl-adapter-native \
+    ros2-rosidl-parser-native \
+    ros2-rosidl-adapter-native \
     python3-numpy-native \
     python3-lark-parser-native \
 "
@@ -10,6 +10,6 @@ ROS_BUILDTOOL_DEPENDS += " \
 # Without the target rosidl-typesupport-{c,cpp}, ament finds the native packages and then fails to link (error: incompatible
 # target).
 ROS_BUILD_DEPENDS += " \
-    rosidl-typesupport-c \
-    rosidl-typesupport-cpp \
+    ros2-rosidl-typesupport-c \
+    ros2-rosidl-typesupport-cpp \
 "

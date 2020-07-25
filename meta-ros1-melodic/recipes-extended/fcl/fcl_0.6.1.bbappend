@@ -5,4 +5,4 @@
 # it's not enabled as optional dependency on common recipe:
 # meta-ros-common/recipes-extended/fcl/fcl_0.6.1.bb
 # but moveit-core from melodic, needs octomap support to be enabled
-DEPENDS += "octomap"
+DEPENDS += "ros1-octomap"

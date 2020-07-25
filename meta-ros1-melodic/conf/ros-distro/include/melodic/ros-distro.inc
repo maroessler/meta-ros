@@ -13,8 +13,8 @@ ROS_DISTRO_BASELINE_PLATFORM = "ubuntu-bionic"
 require conf/ros-distro/include/melodic/generated/superflore-datetime.inc
 require conf/ros-distro/include/melodic/generated/superflore-ros-distro.inc
 require conf/ros-distro/include/melodic/ros-distro-recipe-blacklist.inc
-require conf/ros-distro/include/melodic/ros-distro-preferred-versions.inc
-require conf/ros-distro/include/melodic/ros-distro-preferred-providers.inc
+# require conf/ros-distro/include/melodic/ros-distro-preferred-versions.inc
+# require conf/ros-distro/include/melodic/ros-distro-preferred-providers.inc
 
 # Override settings from generated/superflore-ros-distro.inc here.
 
@@ -166,12 +166,15 @@ ROS_WORLD_SKIP_GROUPS_append_rpi = "${@ ' vc4graphics-without-opengl' if bb.util
 # Must use a _pn- override in this file to override the ROS_BUILD_TYPE of a generated recipe,
 # because we need to set this variable before the "inherit" line in the recipe is parsed,
 # and having it in a .bbappend sets it too late.
-ROS_BUILD_TYPE_pn-python-orocos-kdl = "catkin"
+ROS_BUILD_TYPE_pn-ros1-python-orocos-kdl = "catkin"
+ROS_BUILD_TYPE_pn-ros1-rtabmap = "catkin"
+ROS_BUILD_TYPE_pn-ros1-eigenpy = "catkin"
 
 # Otherwise it will use cmake as specified in
 # https://github.com/mavlink/mavlink-gbp-release/blob/release/melodic/mavlink/2019.11.11-1/package.xml#L29
 # but that doesn't respect the prefix set in meta-ros-common/classes/ros_opt_prefix.bbclass
-ROS_BUILD_TYPE_pn-mavlink = "catkin"
+ROS_BUILD_TYPE_pn-ros1-mavlink = "catkin"
+
 
 # python-backports-ssl@meta-python
 ROS_UNRESOLVED_PLATFORM_PKG_python-backports.ssl-match-hostname = "python-backports-ssl"

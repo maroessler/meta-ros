@@ -12,5 +12,5 @@ RDEPENDS_${PN} += " \
     ${PYTHON_PN}-pyyaml \
     ${PYTHON_PN}-xmlrpc \
     ${PYTHON_PN}-typing \
-    rosidl-generator-py \
+    ros2-rosidl-generator-py \
 "

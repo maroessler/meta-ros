@@ -1,10 +1,10 @@
 # Copyright (c) 2019 LG Electronics, Inc.
 
-ROS_BUILD_DEPENDS_remove = "ament-cmake-core"
-ROS_BUILD_DEPENDS_remove = "ament-package"
+ROS_BUILD_DEPENDS_remove = "ros2-ament-cmake-core"
+ROS_BUILD_DEPENDS_remove = "ros2-ament-package"
 ROS_BUILDTOOL_DEPENDS += " \
-    ament-cmake-core-native \
-    ament-package-native \
+    ros2-ament-cmake-core-native \
+    ros2-ament-package-native \
 "
 
 # The package find files from CMAKE_INSTALL_PREFIX that is just absolute "/usr".
