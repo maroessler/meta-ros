@@ -1,9 +1,9 @@
-# Copyright (c) 2019 LG Electronics, Inc.
+# # Copyright (c) 2019 LG Electronics, Inc.
 
-# Fix up PACKAGECONFIG if Python 2 is being used.
-PACKAGECONFIG_prepend = "${@'python2 ' if d.getVar('ROS_PYTHON_VERSION', True) == '2' else ''}"
-# _remove happens after _prepend.
-PACKAGECONFIG_remove = "${@'python3' if d.getVar('ROS_PYTHON_VERSION', True) == '2' else ''}"
+# # Fix up PACKAGECONFIG if Python 2 is being used.
+PACKAGECONFIG_prepend = "python2 "
+# # _remove happens after _prepend.
+# PACKAGECONFIG_remove = "${@'python3' if d.getVar('ROS_PYTHON_VERSION', True) == '2' else ''}"
 
 # Python variables are set to their values for Python 3 even though
 # python2" appears in PACKAGECONFIG because distutils3-base has been
@@ -15,3 +15,6 @@ PACKAGECONFIG_remove = "${@'python3' if d.getVar('ROS_PYTHON_VERSION', True) == 
 # overwrites all variables opencv needs to configure python2 support
 # correctly.
 inherit ${@bb.utils.contains('PACKAGECONFIG', 'python2', 'distutils-base', '', d)}
+
+FILES_python-opencv = "/usr/lib/python2.7/site-packages/*"
+FILES_python3-opencv = "/usr/lib/python3.7/site-packages/*"

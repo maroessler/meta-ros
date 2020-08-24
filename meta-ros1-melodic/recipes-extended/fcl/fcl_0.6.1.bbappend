@@ -6,3 +6,6 @@
 # meta-ros-common/recipes-extended/fcl/fcl_0.6.1.bb
 # but moveit-core from melodic, needs octomap support to be enabled
 DEPENDS += "ros1-octomap"
+RDEPENDS_{PN} += "ros1-octomap"
+
+INSANE_SKIP_${PN} += "file-rdeps"
