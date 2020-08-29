@@ -11,7 +11,7 @@
 # (none)
 
 # Others
-PNBLACKLIST[libyaml] ?= "Provided by libyaml-vendor"
+# PNBLACKLIST[libyaml] ?= "Provided by libyaml-vendor"
 
 PNBLACKLIST[ros2-ament-clang-format-native] ?= "${@bb.utils.contains('ROS_WORLD_SKIP_GROUPS', 'clang', 'clang-format: depends on clang-format', '', d)}"
 PNBLACKLIST[ros2-ament-clang-format] ?= "${@bb.utils.contains('ROS_WORLD_SKIP_GROUPS', 'clang', 'clang-format: depends on clang-format', '', d)}"

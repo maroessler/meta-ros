@@ -27,17 +27,23 @@ inherit ros_insane_dev_so
 FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
 SRC_URI += " \
     file://0001-Find-numpyconfig.patch \
+    file://0001-Use-libpython_boost37.patch \
 "
 
+DEPENDS += "python-numpy-native"
+
 OECMAKE_CXX_LINK_FLAGS += "-Wl,-rpath-link=${RECIPE_SYSROOT}${ros_libdir}"
+
+# do_configure_prepend() {
+#     sed -i 's#\(/opt/ros/melodic/lib/libeigenpy.so\) #${D}/\1#g' ${WORKDIR}/${RECIPE_SYSROOT}${ros_datadir}/eigenpy/cmake/eigenpyTargets-release.cmake
+# }
 
 do_configure_append() {
     # Fixes this:
     # ros1-moveit-ros-planning-interface/1.0.5-1-r0/recipe-sysroot/usr/include/c++/8.2.0/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
     sed -i 's/-isystem /-I/g' ${B}/build.ninja
-    sed -i 's#\(\S\+\);\(\S\+\);\(\S\+\)usr/lib/libeigenpy.so #/\3/opt/ros/melodic/lib/libeigenpy.so #g' ${B}/build.ninja
-    sed -i 's#\(\S\+\);\(\S\+\);\(\S\+\)/usr/lib/libeigenpy.so"#"/\3/opt/ros/melodic/lib/libeigenpy.so"#g' ${B}/build.ninja
-    
+    # sed -i 's#\(\S\+\);\(\S\+\);\(\S\+\)usr/lib/libeigenpy.so #/\3/opt/ros/melodic/lib/libeigenpy.so #g' ${B}/build.ninja
+    # sed -i 's#\(\S\+\);\(\S\+\);\(\S\+\)/usr/lib/libeigenpy.so"#"/\3/opt/ros/melodic/lib/libeigenpy.so"#g' ${B}/build.ninja    
 }
 
 export RECIPE_SYSROOT

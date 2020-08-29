@@ -5,6 +5,6 @@
 # Set PREFERRED_PROVIDER_<PN> here for non-platform packages and to override those set in
 # ros-distro-platform-preferred-providers.inc .
 
-PREFERRED_PROVIDER_libyaml = "ros2-libyaml-vendor"
-PREFERRED_PROVIDER_libyaml-dev = "ros2-libyaml-vendor-dev"
-PREFERRED_PROVIDER_libyaml-dbg = "ros2-libyaml-vendor-dbg"
+# PREFERRED_PROVIDER_libyaml = "ros2-libyaml-vendor"
+# PREFERRED_PROVIDER_libyaml-dev = "ros2-libyaml-vendor-dev"
+# PREFERRED_PROVIDER_libyaml-dbg = "ros2-libyaml-vendor-dbg"
