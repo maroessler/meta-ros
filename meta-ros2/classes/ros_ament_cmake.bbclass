@@ -29,7 +29,7 @@ EXTRA_OECMAKE_append = "\
 #
 #    "Could not find ROS middleware implementation 'NOTFOUND'"
 #
-export AMENT_PREFIX_PATH="${STAGING_DIR_HOST}${ros_prefix};${STAGING_DIR_NATIVE}${ros_prefix}"
+export AMENT_PREFIX_PATH="${STAGING_DIR_HOST}${ros_prefix}:${STAGING_DIR_NATIVE}${ros_prefix}"
 
 inherit cmake python3native
 

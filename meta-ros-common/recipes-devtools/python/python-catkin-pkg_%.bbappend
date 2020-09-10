@@ -10,3 +10,7 @@ ALTERNATIVE_${PN} = " \
     catkin_test_changelog \
     "
 ALTERNATIVE_PRIORITY = "10"
+
+do_install_append_class-native() {
+    rm -rf ${D}${RECIPE_SYSROOT_NATIVE}/usr/bin/
+}

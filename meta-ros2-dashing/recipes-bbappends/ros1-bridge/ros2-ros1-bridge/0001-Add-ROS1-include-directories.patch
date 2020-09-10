@@ -1,0 +1,13 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 6af7758..97a7d5d 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -133,7 +133,7 @@ if(NOT WIN32)
+     PROPERTIES COMPILE_FLAGS "-Wno-unused-parameter")
+ endif()
+ 
+-include_directories(include ${generated_path})
++include_directories(include ${generated_path} $ENV{ROS1_INCLUDE_PATH})
+ 
+ function(custom_executable target)
+   cmake_parse_arguments(
